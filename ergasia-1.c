@@ -38,7 +38,7 @@ int main()
 
     for (int i=0;i<N*M;i++) 
     {
-        b[i] = rand()%10+1;
+        b[i] = a[i]; //rand()%10+1;
     }
 
     // get starting time (double, seconds) 
@@ -64,7 +64,7 @@ int main()
     get_walltime(&te);
 
     // print computation time
-    printf("Computation time = %f sec\n",(te-ts));
+    printf("Computation time = %f sec\n",(te-ts));        
 
     for(int i=1;i<M-1;i++)
     {
@@ -83,8 +83,8 @@ int main()
         }
     }
 
-    free(b);
     free(a);
+    free(b);
 
     return 0;
 }

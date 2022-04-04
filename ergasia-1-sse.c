@@ -40,7 +40,7 @@ int main()
 
   for (int i=0;i<N*M;i++) 
   {
-    b[i] = rand()%10+1;
+    b[i] = a[i]; //rand()%10+1;
   }  
 
   // get starting time (double, seconds) 
@@ -48,21 +48,21 @@ int main()
 
   for(int i=1;i<M-1;i++)
   {
-    for(int j=1;j<N-1;j++)
+    for(int j=1;j<N-4;j++)
     {
       sum = _mm_set1_ps(0);
       
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i+j]),k1), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i+(j-1)]),k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i+(j+1)]),k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)+j]), k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)+(j-1)]), k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)+(j+1)]), k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)+j]), k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)+(j-1)]), k), sum);
-      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)+(j+1)]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i*N+j]),k1), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i*N+(j-1)]),k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[i*N+(j+1)]),k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)*N+j]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)*N+(j-1)]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i-1)*N+(j+1)]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)*N+j]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)*N+(j-1)]), k), sum);
+      sum = _mm_add_ps(_mm_mul_ps(_mm_loadu_ps(&a[(i+1)*N+(j+1)]), k), sum);
 
-      _mm_storeu_ps(&b[i+j],sum);
+      _mm_storeu_ps(&b[i*M+j],sum);
     }
   }
   // get ending time
